@@ -30,6 +30,59 @@
                     <ul id="messages" class="mt-16 space-y-5 mb-20">
                         
                     </ul>
+                    <div class="flex justify-center items-center">
+                        <div id="image_upload" class="hidden max-w-3xl w-full">
+                            <template id="upload-template">
+                                <div class="relative mt-2 p-2 bg-white border border-gray-200 rounded-xl">
+                                    <img class="mb-2 w-full object-cover rounded-lg" data-dz-thumbnail="">
+                                
+                                    <div class="mb-1 flex justify-between items-center gap-x-3 whitespace-nowrap">
+                                        <div class="w-10">
+                                            <span class="text-sm text-gray-800">
+                                                <span data-hs-file-upload-progress-bar-value="">0</span>%
+                                            </span>
+                                        </div>
+                                
+                                        <div class="flex items-center gap-x-2">
+                                            <button type="button" class="text-gray-500 hover:text-gray-800 focus:outline-none focus:text-gray-800" data-hs-file-upload-remove="">
+                                                <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M3 6h18"></path>
+                                                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                                                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                                                    <line x1="10" x2="10" y1="11" y2="17"></line>
+                                                    <line x1="14" x2="14" y1="11" y2="17"></line>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" data-hs-file-upload-progress-bar="">
+                                        <div class="flex flex-col justify-center rounded-full overflow-hidden bg-blue-600 text-xs text-white text-center whitespace-nowrap transition-all duration-500 hs-file-upload-complete:bg-green-500" style="width: 0" data-hs-file-upload-progress-bar-pane=""></div>
+                                    </div>
+                                </div>
+                            </template>
+                        
+                            <div class="cursor-pointer p-12 flex justify-center bg-white border border-dashed border-gray-300 rounded-xl" data-hs-file-upload-trigger="">
+                                <div class="text-center">
+                                    <span class="inline-flex justify-center items-center size-16 bg-gray-100 text-gray-800 rounded-full">
+                                        <svg class="shrink-0 size-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                            <polyline points="17 8 12 3 7 8"></polyline>
+                                            <line x1="12" x2="12" y1="3" y2="15"></line>
+                                        </svg>
+                                    </span>
+                        
+                                    <div class="mt-4 flex flex-wrap justify-center text-sm leading-6 text-gray-600">
+                                        <span class="pe-1 font-medium text-gray-800">
+                                            Drop your prescriptions / medical records here or
+                                        </span>
+                                        <span class="bg-white font-semibold text-blue-600 hover:text-blue-700 rounded-lg decoration-2 hover:underline focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-600 focus-within:ring-offset-2">browse</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-8 grid grid-cols-4 gap-x-2 empty:gap-0" data-hs-file-upload-previews=""></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -37,13 +90,8 @@
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="relative">
                         <textarea id="response" class="p-4 pb-12 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="Message Sulphr"></textarea>
-                        <div class="absolute bottom-px inset-x-px p-2 rounded-b-lg bg-white">
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center">
-                                    <button onclick="upload()" type="button" class="inline-flex shrink-0 justify-center items-center size-8 rounded-lg text-gray-500 hover:bg-gray-100 focus:z-10 focus:outline-none focus:bg-gray-100">
-                                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
-                                    </button>
-                                </div>
+                        <div class="absolute bottom-px inset-x-px p-2 rounded-b-lg">
+                            <div class="flex justify-end items-center">
                                 <div class="flex items-center gap-x-1">
                                     <div id="send_btn">
                                         <button onclick="send()" type="button" class="inline-flex shrink-0 justify-center items-center size-8 rounded-lg text-white bg-black hover:bg-gray-800 focus:z-10 focus:outline-none focus:bg-gray-800">
@@ -83,13 +131,6 @@
 
     console.log(full_name);
     console.log(initials);
-
-    function scrollToBottom() {
-        window.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: 'smooth'
-        });
-    }
 
     var sent_message = false;
     send_btn_available = `<button onclick="send()" type="button" class="inline-flex shrink-0 justify-center items-center size-8 rounded-lg text-white bg-black hover:bg-gray-800 focus:z-10 focus:outline-none focus:bg-gray-800">
@@ -149,10 +190,11 @@
         }, 1000);
         sent_message = true;
         send_button();
-        scrollToBottom();
-        setTimeout(() => {
-            get_details()
-        }, 3000);
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+        });
+        get_details();
     }
 
     function reply(replyText) {
@@ -187,22 +229,134 @@
     msg_count = 0;
     function get_details(){
         if (msg_count === 0){
-            reply("Do you have any known food allergies, intolerances, or sensitivities? If yes, please specify.");
+            setTimeout(() => {
+                reply("Do you have any known food allergies, intolerances, or sensitivities? If yes, please specify.");
+                window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+        });
+            }, 3000);
         } else if (msg_count === 1){
-            reply("Are you currently on any medications, supplements, or herbal remedies that interact with certain foods?");
+            setTimeout(() => {
+                reply("Are you currently on any medications, supplements, or herbal remedies that interact with certain foods?");
+                window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+        });
+            }, 3000);
         } else if (msg_count === 2){
-            reply("Have you experienced adverse reactions (e.g., swelling, rashes, stomach upset, or breathing difficulties) after eating specific foods? If yes, which foods?");
+            setTimeout(() => {
+                reply("Have you experienced adverse reactions (e.g., swelling, rashes, stomach upset, or breathing difficulties) after eating specific foods? If yes, which foods?");
+                window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+        });
+            }, 3000);
         } else if (msg_count === 3){ 
-            reply("Do you have any other dietary restrictions or preferences?");
+            setTimeout(() => {
+                reply("Do you have any other dietary restrictions or preferences?");
+                window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+        });
+            }, 3000);
         } else {
+            document.getElementById('response').classList.add('hidden');
+            document.getElementById('image_upload').classList.remove('hidden');
             reply("Thank you for sharing your medical history with us. You may upload any relevant prescriptions or medical reports.");
+            window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+        });
         }
         msg_count += 1;
-        scrollToBottom();
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+        });
     }
 
     setTimeout(() => {
         get_details()
     }, 3000);
+
+    const fileUploadTrigger = document.querySelector('[data-hs-file-upload-trigger]');
+    const fileUploadPreviews = document.querySelector('[data-hs-file-upload-previews]');
+    const fileUploadTemplate = document.querySelector('#upload-template').content;
+    const maxFileSize = 50 * 1024 * 1024;
+
+    const base64ImagesList = [];
+
+    function scrollToBottom() {
+        fileUploadPreviews.scrollTop = fileUploadPreviews.scrollHeight;
+    }
+
+    fileUploadTrigger.addEventListener('click', () => {
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = 'image/*';
+        fileInput.multiple = true;
+        fileInput.style.display = 'none';
+
+        fileInput.addEventListener('change', (event) => {
+            const files = event.target.files;
+
+            Array.from(files).forEach((file) => {
+
+                if (file.size > maxFileSize) {
+                    alert('File size exceeds the 50MB limit!');
+                    return;
+                }
+
+                const preview = document.importNode(fileUploadTemplate, true);
+
+                const imgElement = preview.querySelector('[data-dz-thumbnail]');
+                const progressElement = preview.querySelector('[data-hs-file-upload-progress-bar-pane]');
+                const progressBarValue = preview.querySelector('[data-hs-file-upload-progress-bar-value]');
+                const removeButton = preview.querySelector('[data-hs-file-upload-remove]');
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    imgElement.src = e.target.result;
+                    base64ImagesList.push(e.target.result);
+                };
+                reader.readAsDataURL(file);
+
+                removeButton.addEventListener('click', () => {
+                    const index = base64ImagesList.indexOf(imgElement.src);
+                    if (index > -1) {
+                        base64ImagesList.splice(index, 1);
+                    }
+                    preview.remove();
+                });
+
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += 10;
+                    progressElement.style.width = `${progress}%`;
+                    progressBarValue.textContent = progress;
+
+                    if (progress >= 100) {
+                        clearInterval(interval);
+                        progressElement.classList.add('hs-file-upload-complete');
+                    }
+
+                    window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+        });
+                }, 100);
+
+                fileUploadPreviews.appendChild(preview);
+
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        fileInput.click();
+    });
 
 </script>
