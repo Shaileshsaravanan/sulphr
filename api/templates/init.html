@@ -27,20 +27,8 @@
                         Let's get to know you better.
                     </p>
                 </div>
-            
-                <ul id="messages" class="mt-16 space-y-5">
-                        <li class="max-w-4xl py-2 px-4 sm:px-6 lg:px-8 mx-auto flex gap-x-2 sm:gap-x-4 animate-fade-up animate-delay-[2000ms]">
-                            <svg class="shrink-0 size-[38px] rounded-full -mt-1" viewBox="0 0 93 93" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="93" height="93" fill="black"/>
-                                <path d="M46.6 25.7V47.2L41.7 44.4C33 39.4 27.6 30.1 27.6 20H24V44.6C24 52.6 28.6 60 35.9 63.5L46.7 68.7V47.2L51.6 50C60.3 55 65.7 64.3 65.7 74.4H69.3V49.8C69.3 41.8 64.7 34.4 57.4 30.9L46.6 25.7Z" fill="white"/>
-                            </svg>
-                    
-                            <div class="space-y-3">
-                                <h2 class="font-medium text-gray-800">
-                                Do you have any known food allergies, intolerances, or sensitivities? If yes, please specify.
-                                </h2>
-                            </div>
-                        </li>
+                    <ul id="messages" class="mt-16 space-y-5">
+                        
                     </ul>
                 </div>
             </div>
@@ -108,14 +96,14 @@
                                 </div>
                             </button>`;
 
-    send_btn_unavailable = `<button onclick="send()" type="button" class="shrink-0 size-8 rounded-lg text-white bg-black hover:bg-gray-800 focus:z-10 focus:outline-none focus:bg-gray-800">
-                                    <div class="flex justify-center items-center h-full w-full">
-                                        <svg aria-hidden="true" role="status" class="inline w-4 h-4 text-white animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#E5E7EB"/>
-                                            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentColor"/>
-                                        </svg>
-                                    </div>
-                                </button>`;
+    send_btn_unavailable = `<button onclick="send()" type="button" class="shrink-0 size-8 rounded-lg text-white bg-black hover:bg-gray-800 focus:z-10 focus:outline-none focus:bg-gray-800" disabled>
+                                <div class="flex justify-center items-center h-full w-full">
+                                    <svg aria-hidden="true" role="status" class="inline w-4 h-4 text-white animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#E5E7EB"/>
+                                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentColor"/>
+                                    </svg>
+                                </div>
+                            </button>`;
 
     const send_btn = document.getElementById('send_btn');
 
@@ -157,6 +145,7 @@
         }, 1000);
         sent_message = true;
         send_button();
+        askNextQuestion()
     }
 
     function reply(replyText) {
@@ -189,16 +178,43 @@
     }
 
     function gemini(){
-        prompt_medical = `you are Sulphr, an online medical assistant. your job is to assess a person's medical report, prescriptions, specified condition etc. and then answer if they are able to consume a specific food or not based on their allergies and conditions (especially sulphur). have a list of questions prepared
-                          here's a list of reference questions:
-                          Do you have any known food allergies, intolerances, or sensitivities? If yes, please specify.
-                          Are you currently on any medications, supplements, or herbal remedies that interact with certain foods?
-                          Have you experienced adverse reactions (e.g., swelling, rashes, stomach upset, or breathing difficulties) after eating specific foods? If yes, which foods?
-                          ask these questions one by one and wait for the users response and ask anything you think might be relevant, and once you're done, just send <hello_world>
-                          this is the current conversation: <${conversation}>
-                          if its empty, start the conversation.`;
-        
-        
+        let conversation = "";
+
+        function askNextQuestion() {
+            let prompt_medical = `You are Sulphr, an online medical assistant. Your job is to assess a person's medical report, prescriptions, specified condition, etc., and then answer if they are able to consume a specific food or not based on their allergies and conditions.
+            Here's a list of reference questions:
+            1. Do you have any known food allergies, intolerances, or sensitivities? If yes, please specify.
+            2. Are you currently on any medications, supplements, or herbal remedies that interact with certain foods?
+            3. Have you experienced adverse reactions (e.g., swelling, rashes, stomach upset, or breathing difficulties) after eating specific foods? If yes, which foods?
+
+            Ask these questions one by one and wait for the user's response and if you think you have any relevant questions, ask them too. Once you're done, just send <hello_world>.
+            
+            This is the current conversation: <${conversation}>. If it's empty, start the conversation. Do not ask the same questions.`;
+            
+            console.log(prompt_medical);
+            fetch('/gemini', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    prompt: prompt_medical
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    reply(data.reply);
+                    conversation += data.reply;
+                    askNextQuestion();
+                }
+            })
+        }
+        askNextQuestion();
     }
+
+    gemini();
+    sent_message = true;
+    send_button();
 
 </script>
