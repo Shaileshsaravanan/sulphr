@@ -1,12 +1,13 @@
 from flask import Flask, request, render_template
 from supabase import create_client, Client
-from dotenv import load_dotenv
+from environs import Env
 import os
 
 app = Flask(__name__)
-load_dotenv()
-url = os.getenv('SUPABASE_URL')
-key = os.getenv('SUPABASE_KEY')
+env = Env()
+env.read_env()
+url = env.str('SUPABASE_URL')
+key = env.str('SUPABASE_KEY')
 supabase: Client = create_client(url, key)
 
 @app.route('/')
