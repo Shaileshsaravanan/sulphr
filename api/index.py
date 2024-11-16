@@ -11,7 +11,7 @@ url = env.str('SUPABASE_URL')
 key = env.str('SUPABASE_KEY')
 gemini_api = env.str('GEMINI_API')
 genai.configure(api_key=gemini_api)
-model = genai.GenerativeModel("models/gemini-1.5-flash")
+model = genai.GenerativeModel("models/gemini-1.5-pro")
 supabase: Client = create_client(url, key)
 
 @app.route('/')

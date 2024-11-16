@@ -27,7 +27,7 @@
                         Let's get to know you better.
                     </p>
                 </div>
-                    <ul id="messages" class="mt-16 space-y-5">
+                    <ul id="messages" class="mt-16 space-y-5 mb-20">
                         
                     </ul>
                 </div>
@@ -45,9 +45,6 @@
                                     </button>
                                 </div>
                                 <div class="flex items-center gap-x-1">
-                                    <button type="button" class="inline-flex shrink-0 justify-center items-center size-8 rounded-lg text-gray-500 hover:bg-gray-100 focus:z-10 focus:outline-none focus:bg-gray-100">
-                                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
-                                    </button>
                                     <div id="send_btn">
                                         <button onclick="send()" type="button" class="inline-flex shrink-0 justify-center items-center size-8 rounded-lg text-white bg-black hover:bg-gray-800 focus:z-10 focus:outline-none focus:bg-gray-800">
                                             <div class="flex justify-center items-center h-full w-full">
@@ -86,6 +83,13 @@
 
     console.log(full_name);
     console.log(initials);
+
+    function scrollToBottom() {
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+        });
+    }
 
     var sent_message = false;
     send_btn_available = `<button onclick="send()" type="button" class="inline-flex shrink-0 justify-center items-center size-8 rounded-lg text-white bg-black hover:bg-gray-800 focus:z-10 focus:outline-none focus:bg-gray-800">
@@ -145,7 +149,10 @@
         }, 1000);
         sent_message = true;
         send_button();
-        askNextQuestion()
+        scrollToBottom();
+        setTimeout(() => {
+            get_details()
+        }, 3000);
     }
 
     function reply(replyText) {
@@ -177,44 +184,25 @@
         send_button();
     }
 
-    function gemini(){
-        let conversation = "";
-
-        function askNextQuestion() {
-            let prompt_medical = `You are Sulphr, an online medical assistant. Your job is to assess a person's medical report, prescriptions, specified condition, etc., and then answer if they are able to consume a specific food or not based on their allergies and conditions.
-            Here's a list of reference questions:
-            1. Do you have any known food allergies, intolerances, or sensitivities? If yes, please specify.
-            2. Are you currently on any medications, supplements, or herbal remedies that interact with certain foods?
-            3. Have you experienced adverse reactions (e.g., swelling, rashes, stomach upset, or breathing difficulties) after eating specific foods? If yes, which foods?
-
-            Ask these questions one by one and wait for the user's response and if you think you have any relevant questions, ask them too. Once you're done, just send <hello_world>.
-            
-            This is the current conversation: <${conversation}>. If it's empty, start the conversation. Do not ask the same questions.`;
-            
-            console.log(prompt_medical);
-            fetch('/gemini', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    prompt: prompt_medical
-                }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    reply(data.reply);
-                    conversation += data.reply;
-                    askNextQuestion();
-                }
-            })
+    msg_count = 0;
+    function get_details(){
+        if (msg_count === 0){
+            reply("Do you have any known food allergies, intolerances, or sensitivities? If yes, please specify.");
+        } else if (msg_count === 1){
+            reply("Are you currently on any medications, supplements, or herbal remedies that interact with certain foods?");
+        } else if (msg_count === 2){
+            reply("Have you experienced adverse reactions (e.g., swelling, rashes, stomach upset, or breathing difficulties) after eating specific foods? If yes, which foods?");
+        } else if (msg_count === 3){ 
+            reply("Do you have any other dietary restrictions or preferences?");
+        } else {
+            reply("Thank you for sharing your medical history with us. You may upload any relevant prescriptions or medical reports.");
         }
-        askNextQuestion();
+        msg_count += 1;
+        scrollToBottom();
     }
 
-    gemini();
-    sent_message = true;
-    send_button();
+    setTimeout(() => {
+        get_details()
+    }, 3000);
 
 </script>
