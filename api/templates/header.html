@@ -10,6 +10,17 @@
     <script src="https://cdn.jsdelivr.net/npm/preline@2.5.1/dist/preline.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
 </head>
+<style>
+    /* Tailwind CSS custom styles */
+    .scroll-hide::-webkit-scrollbar {
+    display: none;  /* Hides scrollbar for Webkit browsers */
+    }
+
+    .scroll-hide {
+    overflow-x: scroll;  /* Keeps horizontal scrolling enabled */
+    scrollbar-width: none;  /* Hides scrollbar in Firefox */
+    }
+</style>
 <script>
     function setCookie(name, value) {
         let date = new Date();
@@ -28,4 +39,5 @@
         }
         return null;
     }
+    
 </script>

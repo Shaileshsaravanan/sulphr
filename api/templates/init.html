@@ -262,15 +262,14 @@
     }
 
     msg_count = 0;
+    let data_yes = '';
     function get_details(){
         if (msg_count === 0){
-            setTimeout(() => {
                 reply("Do you have any known food allergies, intolerances, or sensitivities? If yes, please specify.");
                         window.scrollTo({
                     top: document.body.scrollHeight,
                     behavior: 'smooth'
                 });
-            }, 3000);
             sent_message = false;
             send_button();
         } else if (msg_count === 1){
@@ -333,13 +332,10 @@
             }).then(response => response.json())
             .then(data => {
                 console.log(data);
-                if (data.status = 'success') {
-                    completeProgress();
-                    setCookie('final_summary', data.final_summary);
-                    setTimeout(() => {
-                        window.location.href = '/home';
-                    }, 3000);
-                }
+                data_yes = data
+                console.log(data.final_summary)
+                setCookie('final_summary', JSON.stringify(data.final_summary));
+                completeProgress();
             });
         }
         msg_count += 1;

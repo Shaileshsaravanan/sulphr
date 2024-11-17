@@ -27,6 +27,13 @@ def index():
 def init():
     return render_template('init.html')
 
+@app.route('/api/gemini', methods=['POST'])
+def api_gemini():
+    data = request.get_json()
+    prompt = data.get('prompt')
+    response = model.generate_content(prompt)
+    return {'response': response.text}
+
 @app.route('/api/signup', methods=['POST'])
 def api_sign_up():
     data = request.get_json()
@@ -76,6 +83,7 @@ def api_init_submit():
         "only fetch the data points and return them.\n"
         f"Conversation Summary: {conversation_summary}\n"
         f"Prescription Summaries: {', '.join(prescription_summary)}"
+        "reply in plain text"
     )
     response = model.generate_content(final_prompt)
     print(response.text)
@@ -85,6 +93,7 @@ def api_init_submit():
         'prescription_summary': prescription_summary,
         'conversation_summary': conversation_summary
     }).eq('email', email).execute()
+    print('==>', response.text)
     return {'status': 'success', 'final_summary': response.text, 'prescription_summary': prescription_summary, 'conversation_summary': conversation_summary}
 
 if __name__ == '__main__':
