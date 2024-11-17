@@ -16,8 +16,11 @@
                     </div>
                 </div>
             </div>
-            <p class="mt-4 text-gray-600 animate-fade-up animate-delay-[1500ms]">
-                Swipe left to sign up, and right to sign in.
+            <p class="mt-4 lg:hidden text-gray-600 animate-fade-up animate-delay-[1500ms]">
+                Swipe right to sign in, and left to sign up.
+            </p>
+            <p class="mt-4 hidden lg:block text-gray-600 animate-fade-up animate-delay-[1500ms]">
+                Press right to sign in, and left to sign up.
             </p>
         </section>
 
@@ -287,6 +290,8 @@
                         alert("Sign up failed.");
                     }
                 })
+            } else {
+                passwordError.textContent = "Password is not 8 digits.";
             }
         }
     }
@@ -318,6 +323,25 @@
                 signup_section.classList.add('animate-fade-left');
             }
             hasSwiped = true;
+    });
+
+    let clicked = false;
+    document.addEventListener('keydown', function(event) {
+        if (!clicked) {
+            if (event.key === 'ArrowRight' || event.code === 'ArrowRight' || event.keyCode === 39) {
+                console.log('Right Arrow key was pressed');
+                init_section.classList.add('hidden');
+                signin_section.classList.remove('hidden');
+                signin_section.classList.add('animate-fade-right')
+                clicked = true;
+            } else if (event.key === 'ArrowLeft') {
+                console.log('Left Arrow key was pressed');
+                init_section.classList.add('hidden')
+                signup_section.classList.remove('hidden');
+                signup_section.classList.add('animate-fade-left');
+                clicked = true;
+            }
+        }
     });
 
     function hashPassword(password) {

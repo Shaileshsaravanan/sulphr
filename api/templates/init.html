@@ -2,113 +2,151 @@
 <html lang="en">
 {% include 'header.html' %}
     <body>
-        <div class="relative h-screen">
-            <div class="py-10 lg:py-14">
-                <div class="max-w-4xl px-4 sm:px-6 lg:px-8 mx-auto text-center">
-                    <div class="flex justify-center items-center animate-fade-up">
-                        <div class="flex gap-4 items-center">
-                            <div id="init_logo" class="flex justify-center items-center">
-                                <svg class="w-8" viewBox="0 0 487 469" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M242.962 49.1417V234.5L190.285 210.36C96.755 167.254 38.7019 87.0754 38.7019 0H0V212.085C0 281.055 49.4525 344.853 127.932 375.028L244.038 419.859V234.5L296.715 258.64C390.245 301.746 448.298 381.925 448.298 469H487V256.915C487 187.945 437.548 124.147 359.068 93.9724L242.962 49.1417Z" fill="#201B21"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <div class="text-2xl font-bold text-gray-900">
-                                    Sulphr    
+        <section id="progress" class="hidden">
+            <div class="w-screen h-screen flex justify-center items-center">
+                <div class="w-full max-w-xl">
+                  <div id="init_progressbar" class="flex items-center gap-x-3 whitespace-nowrap animate-fade-up">
+                    <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden" role="progressbar" id="progress-bar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                      <div class="flex flex-col justify-center rounded-full overflow-hidden bg-black text-xs text-white text-center whitespace-nowrap transition duration-500" id="progress-fill" style="width: 1%"></div>
+                    </div>
+                    <div class="w-10 text-end">
+                      <span class="text-sm text-gray-800" id="progress-percentage">1%</span>
+                    </div>
+                  </div>
+    
+                  <div id="final-progress" class="hidden">
+                    <div class="flex items-center gap-x-3 whitespace-nowrap animate-fade-up">
+                      <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                        <div class="flex flex-col justify-center rounded-full overflow-hidden bg-teal-500 text-xs text-white text-center whitespace-nowrap transition duration-500" style="width: 100%"></div>
+                      </div>
+                      <span class="sr-only">100%</span>
+                      <div class="w-10 text-end">
+                        <span class="shrink-0 ms-auto size-4 flex justify-center items-center rounded-full bg-teal-500 text-white">
+                          <svg class="shrink-0 size-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+              
+                  <div id="text-1" class="mt-4 text-center animate-fade-up animate-delay-[1000ms]">Processing the questionnaire</div>
+                  <div id="text-2" class="mt-4 text-center animate-fade-up hidden">Processing the images</div>
+                  <div id="text-3" class="mt-4 text-center animate-fade-up hidden">Retrieving medical data points</div>
+                  <div id="text-4" class="mt-4 text-center animate-fade-up hidden">Processing all the data</div>
+                  <div id="text-5" class="mt-4 text-center animate-fade-up hidden">Putting everything together</div>
+                </div>
+            </div>
+        </section>
+        <section id="start_stuff">
+            <div class="relative h-screen">
+                <div class="py-10 lg:py-14">
+                    <div class="max-w-4xl px-4 sm:px-6 lg:px-8 mx-auto text-center">
+                        <div class="flex justify-center items-center animate-fade-up">
+                            <div class="flex gap-4 items-center">
+                                <div id="init_logo" class="flex justify-center items-center">
+                                    <svg class="w-8" viewBox="0 0 487 469" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M242.962 49.1417V234.5L190.285 210.36C96.755 167.254 38.7019 87.0754 38.7019 0H0V212.085C0 281.055 49.4525 344.853 127.932 375.028L244.038 419.859V234.5L296.715 258.64C390.245 301.746 448.298 381.925 448.298 469H487V256.915C487 187.945 437.548 124.147 359.068 93.9724L242.962 49.1417Z" fill="#201B21"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold text-gray-900">
+                                        Sulphr    
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                
+                        <h1 class="mt-5 text-3xl font-bold text-gray-800 sm:text-4xl animate-fade-down animate-delay-[1000ms]">
+                            Your Medical History              
+                        </h1>
+                        <p class="text-gray-600 animate-fade-down animate-delay-[1500ms]">
+                            Let's get to know you better.
+                        </p>
                     </div>
-            
-                    <h1 class="mt-5 text-3xl font-bold text-gray-800 sm:text-4xl animate-fade-down animate-delay-[1000ms]">
-                        Your Medical History              
-                    </h1>
-                    <p class="text-gray-600 animate-fade-down animate-delay-[1500ms]">
-                        Let's get to know you better.
-                    </p>
-                </div>
-                    <ul id="messages" class="mt-16 space-y-5 mb-20">
-                        
-                    </ul>
-                    <div class="flex justify-center items-center">
-                        <div id="image_upload" class="hidden max-w-3xl w-full">
-                            <template id="upload-template">
-                                <div class="relative mt-2 p-2 bg-white border border-gray-200 rounded-xl">
-                                    <img class="mb-2 w-full object-cover rounded-lg" data-dz-thumbnail="">
-                                
-                                    <div class="mb-1 flex justify-between items-center gap-x-3 whitespace-nowrap">
-                                        <div class="w-10">
-                                            <span class="text-sm text-gray-800">
-                                                <span data-hs-file-upload-progress-bar-value="">0</span>%
-                                            </span>
+                        <ul id="messages" class="mt-16 space-y-5 mb-20">
+                            
+                        </ul>
+                        <div class="flex justify-center items-center">
+                            <div id="image_upload" class="hidden max-w-3xl w-full">
+                                <template id="upload-template">
+                                    <div class="relative mt-2 p-2 bg-white border border-gray-200 rounded-xl">
+                                        <img class="mb-2 w-full object-cover rounded-lg" data-dz-thumbnail="">
+                                    
+                                        <div class="mb-1 flex justify-between items-center gap-x-3 whitespace-nowrap">
+                                            <div class="w-10">
+                                                <span class="text-sm text-gray-800">
+                                                    <span data-hs-file-upload-progress-bar-value="">0</span>%
+                                                </span>
+                                            </div>
+                                    
+                                            <div class="flex items-center gap-x-2">
+                                                <button type="button" class="text-gray-500 hover:text-gray-800 focus:outline-none focus:text-gray-800" data-hs-file-upload-remove="">
+                                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M3 6h18"></path>
+                                                        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                                                        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                                                        <line x1="10" x2="10" y1="11" y2="17"></line>
+                                                        <line x1="14" x2="14" y1="11" y2="17"></line>
+                                                    </svg>
+                                                </button>
+                                            </div>
                                         </div>
-                                
-                                        <div class="flex items-center gap-x-2">
-                                            <button type="button" class="text-gray-500 hover:text-gray-800 focus:outline-none focus:text-gray-800" data-hs-file-upload-remove="">
-                                                <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                    <path d="M3 6h18"></path>
-                                                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-                                                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-                                                    <line x1="10" x2="10" y1="11" y2="17"></line>
-                                                    <line x1="14" x2="14" y1="11" y2="17"></line>
-                                                </svg>
+                                    
+                                        <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" data-hs-file-upload-progress-bar="">
+                                            <div class="flex flex-col justify-center rounded-full overflow-hidden bg-blue-600 text-xs text-white text-center whitespace-nowrap transition-all duration-500 hs-file-upload-complete:bg-green-500" style="width: 0" data-hs-file-upload-progress-bar-pane=""></div>
+                                        </div>
+                                    </div>
+                                </template>
+                            
+                                <div class="cursor-pointer p-12 flex justify-center bg-white border border-dashed border-gray-300 rounded-xl" data-hs-file-upload-trigger="">
+                                    <div class="text-center">
+                                        <span class="inline-flex justify-center items-center size-16 bg-gray-100 text-gray-800 rounded-full">
+                                            <svg class="shrink-0 size-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                                <polyline points="17 8 12 3 7 8"></polyline>
+                                                <line x1="12" x2="12" y1="3" y2="15"></line>
+                                            </svg>
+                                        </span>
+                            
+                                        <div class="mt-4 flex flex-wrap justify-center text-sm leading-6 text-gray-600">
+                                            <span class="pe-1 font-medium text-gray-800">
+                                                Drop your prescriptions / medical records here or
+                                            </span>
+                                            <span class="bg-white font-semibold text-blue-600 hover:text-blue-700 rounded-lg decoration-2 hover:underline focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-600 focus-within:ring-offset-2">browse</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-8 grid grid-cols-4 gap-x-2 empty:gap-0" data-hs-file-upload-previews=""></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="fixed bottom-0 left-0 right-0 z-10 border-gray-200 pt-2 pb-3 sm:pt-4 sm:pb-6">
+                    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="relative">
+                            <textarea id="response" class="p-4 pb-12 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="Message Sulphr"></textarea>
+                            <div class="absolute bottom-px inset-x-px p-2 rounded-b-lg">
+                                <div class="flex justify-end items-center">
+                                    <div class="flex items-center gap-x-1">
+                                        <div id="send_btn">
+                                            <button onclick="send()" type="button" class="inline-flex shrink-0 justify-center items-center size-8 rounded-lg text-white bg-black hover:bg-gray-800 focus:z-10 focus:outline-none focus:bg-gray-800">
+                                                <div class="flex justify-center items-center h-full w-full">
+                                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                                        <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
+                                                    </svg>
+                                                </div>
                                             </button>
                                         </div>
                                     </div>
-                                
-                                    <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" data-hs-file-upload-progress-bar="">
-                                        <div class="flex flex-col justify-center rounded-full overflow-hidden bg-blue-600 text-xs text-white text-center whitespace-nowrap transition-all duration-500 hs-file-upload-complete:bg-green-500" style="width: 0" data-hs-file-upload-progress-bar-pane=""></div>
-                                    </div>
-                                </div>
-                            </template>
-                        
-                            <div class="cursor-pointer p-12 flex justify-center bg-white border border-dashed border-gray-300 rounded-xl" data-hs-file-upload-trigger="">
-                                <div class="text-center">
-                                    <span class="inline-flex justify-center items-center size-16 bg-gray-100 text-gray-800 rounded-full">
-                                        <svg class="shrink-0 size-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                            <polyline points="17 8 12 3 7 8"></polyline>
-                                            <line x1="12" x2="12" y1="3" y2="15"></line>
-                                        </svg>
-                                    </span>
-                        
-                                    <div class="mt-4 flex flex-wrap justify-center text-sm leading-6 text-gray-600">
-                                        <span class="pe-1 font-medium text-gray-800">
-                                            Drop your prescriptions / medical records here or
-                                        </span>
-                                        <span class="bg-white font-semibold text-blue-600 hover:text-blue-700 rounded-lg decoration-2 hover:underline focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-600 focus-within:ring-offset-2">browse</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-8 grid grid-cols-4 gap-x-2 empty:gap-0" data-hs-file-upload-previews=""></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="fixed bottom-0 left-0 right-0 z-10 border-gray-200 pt-2 pb-3 sm:pt-4 sm:pb-6">
-                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="relative">
-                        <textarea id="response" class="p-4 pb-12 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="Message Sulphr"></textarea>
-                        <div class="absolute bottom-px inset-x-px p-2 rounded-b-lg">
-                            <div class="flex justify-end items-center">
-                                <div class="flex items-center gap-x-1">
-                                    <div id="send_btn">
-                                        <button onclick="send()" type="button" class="inline-flex shrink-0 justify-center items-center size-8 rounded-lg text-white bg-black hover:bg-gray-800 focus:z-10 focus:outline-none focus:bg-gray-800">
-                                            <div class="flex justify-center items-center h-full w-full">
-                                                <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                                    <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
-                                                </svg>
-                                            </div>
-                                        </button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </body>
 </html>
 <script>
@@ -221,9 +259,6 @@
         setTimeout(() => {
             replyMessage.classList.remove('animate-fade-up');
         }, 1000);
-
-        sent_message = false;
-        send_button();
     }
 
     msg_count = 0;
@@ -231,11 +266,13 @@
         if (msg_count === 0){
             setTimeout(() => {
                 reply("Do you have any known food allergies, intolerances, or sensitivities? If yes, please specify.");
-                window.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: 'smooth'
-        });
+                        window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth'
+                });
             }, 3000);
+            sent_message = false;
+            send_button();
         } else if (msg_count === 1){
             setTimeout(() => {
                 reply("Are you currently on any medications, supplements, or herbal remedies that interact with certain foods?");
@@ -244,6 +281,8 @@
             behavior: 'smooth'
         });
             }, 3000);
+            sent_message = false;
+            send_button();
         } else if (msg_count === 2){
             setTimeout(() => {
                 reply("Have you experienced adverse reactions (e.g., swelling, rashes, stomach upset, or breathing difficulties) after eating specific foods? If yes, which foods?");
@@ -252,6 +291,8 @@
             behavior: 'smooth'
         });
             }, 3000);
+            sent_message = false;
+            send_button();
         } else if (msg_count === 3){ 
             setTimeout(() => {
                 reply("Do you have any other dietary restrictions or preferences?");
@@ -260,7 +301,16 @@
             behavior: 'smooth'
         });
             }, 3000);
-        } else {
+            sent_message = false;
+            send_button();
+        } else if (msg_count === 4){
+            send_btn.innerHTML = `<button onclick="get_details()" type="button" class="inline-flex shrink-0 justify-center items-center size-8 rounded-lg text-white bg-black hover:bg-gray-800 focus:z-10 focus:outline-none focus:bg-gray-800">
+                                <div class="flex justify-center items-center h-full w-full">
+                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
+                                    </svg>
+                                </div>
+                            </button>`;
             document.getElementById('response').classList.add('hidden');
             document.getElementById('image_upload').classList.remove('hidden');
             reply("Thank you for sharing your medical history with us. You may upload any relevant prescriptions or medical reports.");
@@ -268,6 +318,29 @@
             top: document.body.scrollHeight,
             behavior: 'smooth'
         });
+        } else {
+            start();
+            fetch('/api/init/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: getCookie('email'),
+                    conversation: conversation,
+                    images: base64ImagesList
+                })
+            }).then(response => response.json())
+            .then(data => {
+                console.log(data);
+                if (data.status = 'success') {
+                    completeProgress();
+                    setCookie('final_summary', data.final_summary);
+                    setTimeout(() => {
+                        window.location.href = '/home';
+                    }, 3000);
+                }
+            });
         }
         msg_count += 1;
         window.scrollTo({
@@ -359,4 +432,52 @@
         fileInput.click();
     });
 
+    const progressBar = document.getElementById('progress-fill');
+    const progressPercentage = document.getElementById('progress-percentage');
+    const finalProgress = document.getElementById('final-progress');
+    const init_progressbar = document.getElementById('init_progressbar')
+
+    const texts = [
+        document.getElementById('text-1'),
+        document.getElementById('text-2'),
+        document.getElementById('text-3'),
+        document.getElementById('text-4'),
+        document.getElementById('text-5'),
+    ];
+
+    let progress = 1;
+    let textIndex = 0;
+    let interval
+    const start_stuff = document.getElementById('start_stuff');
+    const progressSection = document.getElementById('progress');
+
+    function start(){
+        start_stuff.classList.add('hidden');
+        progressSection.classList.remove('hidden')
+        interval = setInterval(() => {
+            
+            progress += 1; // Increment progress
+            progressBar.style.width = `${progress}%`;
+            progressPercentage.innerText = `${progress}%`;
+
+            if (progress % 25 === 0 && textIndex < texts.length - 1) {
+                texts[textIndex].classList.add('hidden');
+                textIndex++;
+                texts[textIndex].classList.remove('hidden');
+            }
+
+            if (progress === 99) {
+                clearInterval(interval);
+            }
+        }, 1200);
+    }
+
+    function completeProgress() {
+        clearInterval(interval)
+        texts[textIndex].classList.add('hidden'); // Hide current text
+        init_progressbar.classList.add('hidden')
+        finalProgress.classList.remove('hidden'); // Show final progress bar
+        progressBar.style.width = '100%'; // Fill progress bar
+        progressPercentage.innerText = '100%';
+    }
 </script>
