@@ -336,6 +336,9 @@
                 console.log(data.final_summary)
                 setCookie('final_summary', JSON.stringify(data.final_summary));
                 completeProgress();
+                setTimeout(() => {
+                    window.location.href = '/home';
+                }, 3000);
             });
         }
         msg_count += 1;
