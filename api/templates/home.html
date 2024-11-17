@@ -2,45 +2,90 @@
 <html lang="en">
    {% include 'header.html' %}
    <body>
-      <div class="relative h-screen">
-         <div class="py-10 lg:py-14">
-            <div class="max-w-4xl px-4 sm:px-6 lg:px-8 mx-auto text-center">
-               <div class="flex justify-center items-center animate-fade-up">
-                  <div class="flex gap-4 items-center pl-20 lg:pl-0">
-                     <div id="init_logo" class="flex justify-center items-center">
-                        <svg class="w-8" viewBox="0 0 487 469" fill="none" xmlns="http://www.w3.org/2000/svg">
-                           <path d="M242.962 49.1417V234.5L190.285 210.36C96.755 167.254 38.7019 87.0754 38.7019 0H0V212.085C0 281.055 49.4525 344.853 127.932 375.028L244.038 419.859V234.5L296.715 258.64C390.245 301.746 448.298 381.925 448.298 469H487V256.915C487 187.945 437.548 124.147 359.068 93.9724L242.962 49.1417Z" fill="#201B21"/>
-                        </svg>
-                     </div>
-                     <div>
-                        <div class="text-2xl font-bold text-gray-900">
-                           Sulphr    
+    <section id="scan" class="hidden">
+        <div class="w-screen h-screen flex justify-center items-center">
+            <video id="video" class="h-screen w-screen" autoplay></video>
+            <canvas id="canvas" class="h-screen w-screen" style="display:none;"></canvas>
+            <button id="snap" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10">
+                Capture
+            </button>
+        </div>
+    </section>
+      <section id="main">
+        <div class="relative h-screen">
+            <div class="py-10 lg:py-14">
+               <div class="max-w-4xl px-4 sm:px-6 lg:px-8 mx-auto text-center">
+                  <div class="flex justify-center items-center animate-fade-up">
+                     <div class="flex gap-4 items-center pl-20 lg:pl-0">
+                        <div id="init_logo" class="flex justify-center items-center">
+                           <svg class="w-8" viewBox="0 0 487 469" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M242.962 49.1417V234.5L190.285 210.36C96.755 167.254 38.7019 87.0754 38.7019 0H0V212.085C0 281.055 49.4525 344.853 127.932 375.028L244.038 419.859V234.5L296.715 258.64C390.245 301.746 448.298 381.925 448.298 469H487V256.915C487 187.945 437.548 124.147 359.068 93.9724L242.962 49.1417Z" fill="#201B21"/>
+                           </svg>
+                        </div>
+                        <div>
+                           <div class="text-2xl font-bold text-gray-900">
+                              Sulphr    
+                           </div>
                         </div>
                      </div>
                   </div>
                </div>
-            </div>
-            <div id="cards">
-                <div class="absolute bottom-40 left-0 right-0 px-4 flex justify-center flex-col items-center gap-6">
-                    <!-- Container for the cards -->
-                    <div class="flex scroll-hide gap-4 scroll-smooth -mb-20 lg:mb-0 pl-20 lg:pl-0 animate-fade-up animate-delay-[500ms]">
-                       <!-- First Card -->
-                       <div class="w-[90%] sm:w-full max-w-xs flex-shrink-0">
-                          <div class="flex flex-col bg-purple-100 rounded-xl shadow-md p-6 text-center">
-                             <div class="flex flex-col items-center mb-4">
-                                <div class="h-14 w-14 flex justify-center items-center rounded-full bg-white mb-4">
-                                   <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                      <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
-                                      <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
-                                   </svg>
+               <div id="cards">
+                   <div class="absolute bottom-40 left-0 right-0 px-4 flex justify-center flex-col items-center gap-6">
+                       <!-- Container for the cards -->
+                       <div class="flex scroll-hide gap-4 scroll-smooth -mb-20 lg:mb-0 pl-20 lg:pl-0 animate-fade-up animate-delay-[500ms]">
+                          <!-- First Card -->
+                          <div class="w-[90%] sm:w-full max-w-xs flex-shrink-0">
+                             <div class="flex flex-col bg-purple-100 rounded-xl shadow-md p-6 text-center">
+                                <div class="flex flex-col items-center mb-4">
+                                   <div class="h-14 w-14 flex justify-center items-center rounded-full bg-white mb-4">
+                                      <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                         <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
+                                         <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
+                                      </svg>
+                                   </div>
+                                   <h3 class="text-lg font-bold text-gray-900 mb-2">Food or Drink to Analyze?</h3>
+                                   <p class="text-gray-600 text-sm">
+                                      Click below to scan and check if it’s safe for consumption.
+                                   </p>
                                 </div>
-                                <h3 class="text-lg font-bold text-gray-900 mb-2">Food or Drink to Analyze?</h3>
-                                <p class="text-gray-600 text-sm">
-                                   Click below to scan and check if it’s safe for consumption.
-                                </p>
+                                <div class="flex gap-2 lg:gap-4">
+                                   <button onclick="scan_analyse()" type="button" class="mt-auto w-full flex items-center justify-between px-4 py-2 rounded-full bg-black text-white hover:bg-gray-800 text-sm font-medium">
+                                      <span>Scan</span>
+                                      <div class="h-8 w-8 bg-gray-600 flex items-center justify-center rounded-full">
+                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                                         </svg>
+                                      </div>
+                                   </button>
+                                   <button type="button" class="w-full flex items-center justify-between px-4 py-2 rounded-full bg-black text-white hover:bg-gray-800 text-sm font-medium">
+                                      <span>Upload</span>
+                                      <div class="h-8 w-8 bg-gray-600 flex items-center justify-center rounded-full">
+                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12M6 12h12" />
+                                         </svg>
+                                      </div>
+                                   </button>
+                                </div>
                              </div>
-                             <div class="flex gap-2 lg:gap-4">
-                                <button onclick="scan_analyse()" type="button" class="mt-auto w-full flex items-center justify-between px-4 py-2 rounded-full bg-black text-white hover:bg-gray-800 text-sm font-medium">
+                          </div>
+                    
+                          <!-- Second Card -->
+                          <div class="w-[90%] sm:w-full max-w-xs flex-shrink-0">
+                             <div class="flex flex-col bg-green-100 rounded-xl shadow-md p-6 text-center">
+                                <div class="flex flex-col items-center mb-4">
+                                   <div class="h-14 w-14 flex justify-center items-center rounded-full bg-white mb-4">
+                                      <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                         <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
+                                         <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
+                                      </svg>
+                                   </div>
+                                   <h3 class="text-lg font-bold text-gray-900 mb-2">Find Safe Alternatives</h3>
+                                   <p class="text-gray-600 text-sm">
+                                       Upload an image of your food or drink to find similar safe-to-consume options.
+                                   </p>
+                                </div>
+                                <button type="button" class="mt-auto h-full w-full flex items-center justify-between px-4 py-2 rounded-full bg-black text-white hover:bg-gray-800 text-sm font-medium">
                                    <span>Scan</span>
                                    <div class="h-8 w-8 bg-gray-600 flex items-center justify-center rounded-full">
                                       <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -48,74 +93,40 @@
                                       </svg>
                                    </div>
                                 </button>
-                                <button type="button" class="w-full flex items-center justify-between px-4 py-2 rounded-full bg-black text-white hover:bg-gray-800 text-sm font-medium">
-                                   <span>Upload</span>
-                                   <div class="h-8 w-8 bg-gray-600 flex items-center justify-center rounded-full">
-                                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12M6 12h12" />
-                                      </svg>
-                                   </div>
-                                </button>
                              </div>
                           </div>
                        </div>
-                 
-                       <!-- Second Card -->
-                       <div class="w-[90%] sm:w-full max-w-xs flex-shrink-0">
-                          <div class="flex flex-col bg-green-100 rounded-xl shadow-md p-6 text-center">
-                             <div class="flex flex-col items-center mb-4">
-                                <div class="h-14 w-14 flex justify-center items-center rounded-full bg-white mb-4">
-                                   <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                      <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
-                                      <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
-                                   </svg>
-                                </div>
-                                <h3 class="text-lg font-bold text-gray-900 mb-2">Find Safe Alternatives</h3>
-                                <p class="text-gray-600 text-sm">
-                                    Upload an image of your food or drink to find similar safe-to-consume options.
-                                </p>
-                             </div>
-                             <button type="button" class="mt-auto h-full w-full flex items-center justify-between px-4 py-2 rounded-full bg-black text-white hover:bg-gray-800 text-sm font-medium">
-                                <span>Scan</span>
-                                <div class="h-8 w-8 bg-gray-600 flex items-center justify-center rounded-full">
-                                   <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                      <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                                   </svg>
-                                </div>
-                             </button>
-                          </div>
-                       </div>
-                    </div>
-                </div>
+                   </div>
+               </div>
+               <ul id="messages" class="mt-16 space-y-5 mb-20">
+               </ul>
             </div>
-            <ul id="messages" class="mt-16 space-y-5 mb-20">
-            </ul>
          </div>
-      </div>
-      </div>
-      <div class="fixed bottom-0 left-0 right-0 z-10 border-gray-200 pt-2 pb-3 sm:pt-4 sm:pb-6 animate-fade-up animate-delay-[1000ms]">
-         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="relative">
-               <textarea id="response" class="p-4 pb-12 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="Ask Sulphr"></textarea>
-               <div class="absolute bottom-px inset-x-px p-2 rounded-b-lg">
-                  <div class="flex justify-end items-center">
-                     <div class="flex items-center gap-x-1">
-                        <div id="send_btn">
-                           <button onclick="send()" type="button" class="inline-flex shrink-0 justify-center items-center size-8 rounded-lg text-white bg-black hover:bg-gray-800 focus:z-10 focus:outline-none focus:bg-gray-800">
-                              <div class="flex justify-center items-center h-full w-full">
-                                 <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
-                                 </svg>
-                              </div>
-                           </button>
+         </div>
+         <div class="fixed bottom-0 left-0 right-0 z-10 border-gray-200 pt-2 pb-3 sm:pt-4 sm:pb-6 animate-fade-up animate-delay-[1000ms]">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+               <div class="relative">
+                  <textarea id="response" class="p-4 pb-12 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="Ask Sulphr"></textarea>
+                  <div class="absolute bottom-px inset-x-px p-2 rounded-b-lg">
+                     <div class="flex justify-end items-center">
+                        <div class="flex items-center gap-x-1">
+                           <div id="send_btn">
+                              <button onclick="send()" type="button" class="inline-flex shrink-0 justify-center items-center size-8 rounded-lg text-white bg-black hover:bg-gray-800 focus:z-10 focus:outline-none focus:bg-gray-800">
+                                 <div class="flex justify-center items-center h-full w-full">
+                                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                       <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
+                                    </svg>
+                                 </div>
+                              </button>
+                           </div>
                         </div>
                      </div>
                   </div>
                </div>
             </div>
          </div>
-      </div>
-      </div>
+         </div>
+      </section>
    </body>
 </html>
 <script>
@@ -208,7 +219,7 @@
    }
    
    function reply(replyText) {
-   
+        cards.classList.add('hidden');
        updateConversation("Sulphr", replyText);
    
        const replyMessage = document.createElement('li');
@@ -257,33 +268,58 @@
    }
    
    function scan_analyse(){
-        image = scan();
-   }
+    scan().then(image => {
+        fetch('/api/gemini/pic', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                image: image,
+                history: med_history
+            })
+        }).then(response => response.json())
+        .then(data => {
+            reply(data.response);
+            sent_message = false;
+            send_button();
+            main_section.classList.remove('hidden');
+            scan_section.classList.add('hidden');
+        });
+    });
+}
+const main_section = document.getElementById('main');
+const scan_section = document.getElementById('scan');
 
-   function scan(){
-        const video = document.getElementById('video');
-        const snapButton = document.getElementById('snap');
-        const canvas = document.getElementById('canvas');
-        const base64Output = document.getElementById('base64Output');
+function scan(){
+    return new Promise((resolve, reject) => {
+        main_section.classList.add('hidden');
+        scan_section.classList.remove('hidden');
+        let video = document.getElementById('video');
+        let canvas = document.getElementById('canvas');
+        let snapButton = document.getElementById('snap');
 
-        // Access the webcam
         navigator.mediaDevices.getUserMedia({ video: true })
-        .then((stream) => {
-            video.srcObject = stream;
-        })
-        .catch((err) => {
-            console.error("Error accessing webcam: ", err);
-        });
+            .then(function(stream) {
+                video.srcObject = stream;
+            })
+            .catch(function(err) {
+                console.error("Error accessing the camera: " + err);
+            });
 
-        // Capture the image when the "Take Picture" button is clicked
-        snapButton.addEventListener('click', () => {
-        const context = canvas.getContext('2d');
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        snapButton.addEventListener('click', function() {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
 
-        // Convert the image to Base64
-        const dataUrl = canvas.toDataURL();
-            return dataUrl; // Display the Base64 string
+            let imageBase64 = canvas.toDataURL('image/png');
+            let base64_image = imageBase64.replace('data:image/png;base64,', '');
+            
+            // Resolve the promise with the base64 image data
+            resolve(base64_image);
+            
         });
-   }
+    });
+}
 
 </script>

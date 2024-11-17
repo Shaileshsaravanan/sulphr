@@ -51,6 +51,39 @@ def api_sign_up():
 def home():
     return render_template('home.html')
 
+@app.route('/api/gemini/pic', methods=['POST'])
+def api_gemini_pic():
+    data = request.get_json()
+    image = data.get('image')
+    history = data.get('history')
+    print(image, history)   
+    
+    try:
+        # Decode base64 to image bytes
+        image_bytes = base64.b64decode(image)
+        
+        # Create a temporary file to store the image
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".png") as temp_file:
+            temp_file.write(image_bytes)
+            temp_file_path = temp_file.name 
+        
+        # Open the image from the temporary file
+        image_data = Image.open(temp_file_path)
+        
+        # Create a prompt for the model to process
+        prompt = f"you are sulphr an online medical assistant, this is my med_history, {history}x now, can I consume this product based on my medical history? do not use user or anything, just response and maintain the conversation flow. research, search on the product and provide a response, if you are not sure, tell that due to your allrgies, you cannot consume this."
+        
+        # Assuming the model is designed to handle both image and text input:
+        response = model.generate_content([image_data, prompt])
+        
+        # Print and return the response
+        print(response.text)
+        return {'status': 'success', 'response': response.text}
+    
+    except Exception as e:
+        print(f"Error processing the image or generating response: {e}")
+        return {'status': 'error', 'message': str(e)}
+
 @app.route('/api/init/submit', methods=['POST'])
 def api_init_submit():
     data = request.get_json()
